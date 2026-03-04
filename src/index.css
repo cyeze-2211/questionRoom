@@ -1,0 +1,72 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+  background-color: #F8F9FA !important;
+}
+.Container{
+  width: 1430px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.modal2{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; /* Скрывает клики, если модал закрыт */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal2.open{
+  opacity: 1;
+  pointer-events: all;
+}
+.Modal2Content{
+  width: 500px;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  border-radius: 5px;
+}
+.Modal3Content{
+  width: 60%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track{
+    background: white;
+  }
+  
+  ::-webkit-scrollbar-thumb{
+    background:black;
+    border-radius: 15px;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.search__wrapper{
+  width: 100%;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(4 ,1fr);
+  gap: 10px;
+}
