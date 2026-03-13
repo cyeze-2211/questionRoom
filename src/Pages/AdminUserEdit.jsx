@@ -9,7 +9,7 @@ export default function AdminUserEdit() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        id: id,
+        id,
         accountType: "STUDENT",
         address: "",
         addressDistrict: "",
@@ -19,8 +19,10 @@ export default function AdminUserEdit() {
         creatorId: localStorage.getItem("userId"),
         dateBirth: "",
         email: "",
+        fatherName: "",
         firstName: "",
         lastName: "",
+        motherName: "",
         genderType: "",
         groupId: null,
         password: "",
@@ -28,59 +30,49 @@ export default function AdminUserEdit() {
         school: "",
         schoolClass: "",
         telegramChatId: null,
+        telegramChatIdFather: null,
+        telegramChatIdMother: null,
         testId: null,
     });
 
     const [groups, setGroups] = useState([]);
     const [tests, setTests] = useState([]);
 
-    // --- Get One User ---
     const getUser = async () => {
-    try {
-        const res = await axios.get(`/users/${id}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
-
-        const user = res.data?.object || {};
-        const { 
-            password, authorities, enabled, 
-            accountNonExpired, accountNonLocked, 
-            credentialsNonExpired, username,
-            createdAt, createdBy, deleted,
-            ...safeUser 
-        } = user;
-
-        setFormData((prev) => ({
-            ...prev,
-            ...safeUser,
-            password: "",
-        }));
-    } catch (err) {
-        console.error("Error fetching user:", err);
-    }
-};
-
+        try {
+            const res = await axios.get(`/users/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+            });
+            const user = res.data?.object || {};
+            const {
+                password, authorities, enabled,
+                accountNonExpired, accountNonLocked,
+                credentialsNonExpired, username,
+                createdAt, createdBy, deleted,
+                ...safeUser
+            } = user;
+            setFormData(prev => ({ ...prev, ...safeUser, password: "" }));
+        } catch (err) {
+            console.error("Error fetching user:", err);
+        }
+    };
 
     const getAllGroups = async () => {
         try {
-            const response = await axios.get("/group/get/all", {
+            const res = await axios.get("/group/get/all", {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
-            setGroups(response?.data?.object || []);
-        } catch (error) {
-            console.error("Error fetching groups:", error);
-        }
+            setGroups(res?.data?.object || []);
+        } catch (e) { console.error(e); }
     };
 
     const getAllTest = async () => {
         try {
-            const response = await axios.get("/test/get?isTelegram=true&isWeb=true", {
+            const res = await axios.get("/test/get?isTelegram=true&isWeb=true", {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
-            setTests(response?.data?.object || []);
-        } catch (error) {
-            console.error("Error fetching tests:", error);
-        }
+            setTests(res?.data?.object || []);
+        } catch (e) { console.error(e); }
     };
 
     useEffect(() => {
@@ -91,44 +83,30 @@ export default function AdminUserEdit() {
 
     const handleChange = (e) => {
         const { name, value, type } = e.target;
-        setFormData((prev) => ({
+        setFormData(prev => ({
             ...prev,
-            [name]: type === "number" ? Number(value) : value,
+            [name]: type === "number" ? (value === "" ? null : Number(value)) : value,
         }));
     };
 
     const handleSubmit = async () => {
-         try {
-        const submitData = {
-            ...formData,
-            ...(formData.password ? {} : { password: undefined }),
-        };
-
-        await axios.put(`/users/edit`, submitData, {
-            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
-            Swal.fire({
-                title: "Muvaffaqiyatli yangilandi!",
-                icon: "success",
-                position: "top-end",
-                timer: 3000,
-                toast: true,
-                showConfirmButton: false,
+        try {
+            const submitData = { ...formData, ...(formData.password ? {} : { password: undefined }) };
+            await axios.put(`/users/edit`, submitData, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
+            Swal.fire({ title: "Muvaffaqiyatli yangilandi!", icon: "success", position: "top-end", timer: 3000, toast: true, showConfirmButton: false });
             navigate(-1);
         } catch (err) {
-            console.error(err);
-            Swal.fire({
-                title: "Xatolik!",
-                text: err.response?.data?.message || "Error.",
-                icon: "error",
-                position: "top-end",
-                timer: 3000,
-                toast: true,
-                showConfirmButton: false,
-            });
+            Swal.fire({ title: "Xatolik!", text: err.response?.data?.message || "Error.", icon: "error", position: "top-end", timer: 3000, toast: true, showConfirmButton: false });
         }
     };
+
+    const sectionTitle = (text) => (
+        <Typography variant="h6" className="mb-4 text-blue-600">{text}</Typography>
+    );
+
+    const req = <span className="text-red-500">*</span>;
 
     return (
         <div className="mx-auto p-10">
@@ -143,18 +121,21 @@ export default function AdminUserEdit() {
 
             <Card shadow={true} className="p-4">
                 <CardBody className="space-y-8">
-                    {/* Shaxsiy ma'lumotlar */}
+
                     <div>
-                        <Typography variant="h6" className="mb-4 text-blue-600">
-                            Shaxsiy ma'lumotlar
-                        </Typography>
+                        {sectionTitle("Shaxsiy ma'lumotlar")}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Input label={<>Ism <span className="text-red-500">*</span></>} name="firstName" value={formData.firstName || ""} onChange={handleChange} />
-                            <Input label={<>Familiya <span className="text-red-500">*</span></>} name="lastName" value={formData.lastName || ""} onChange={handleChange} />
-                            <Input label={<>Tug'ilgan sana <span className="text-red-500">*</span></>} type="date" name="dateBirth" value={formData.dateBirth || ""} onChange={handleChange} />
+                            <Input label={<>Ism {req}</>} name="firstName" value={formData.firstName || ""} onChange={handleChange} />
+                            <Input label={<>Familiya {req}</>} name="lastName" value={formData.lastName || ""} onChange={handleChange} />
+                            <Input label="Otasining ismi" name="fatherName" value={formData.fatherName || ""} onChange={handleChange} />
+                            <Input label="Onasining ismi" name="motherName" value={formData.motherName || ""} onChange={handleChange} />
+                            <Input label={<>Tug'ilgan sana {req}</>} type="date" name="dateBirth" value={formData.dateBirth || ""} onChange={handleChange} />
+                            <Input label="Yangi parol" type="password" name="password" value={formData.password || ""} onChange={handleChange} />
+
                             <div className="flex flex-col">
+                                <label className="mb-1 text-sm font-medium text-gray-700">Jinsi</label>
                                 <select
-                                    name={<>Jins <span className="text-red-500">*</span></>}
+                                    name="genderType"
                                     value={formData.genderType || ""}
                                     onChange={handleChange}
                                     className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -163,29 +144,44 @@ export default function AdminUserEdit() {
                                     <option value="ERKAK">Erkak</option>
                                     <option value="AYOL">Ayol</option>
                                 </select>
+                                
                             </div>
-                            <Input  label={<>Parol <span className="text-red-500">*</span></>} type="password" name="password" value={formData.password || ""} onChange={handleChange} />
                         </div>
                     </div>
 
-                  
+                    {/* Kontakt */}
                     <div>
-                        <Typography variant="h6" className="mb-4 text-blue-600">
-                            Kontakt
-                        </Typography>
+                        {sectionTitle("Kontakt")}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Input  label={<>Telefon raqam <span className="text-red-500">*</span></>} name="phoneNumber" value={formData.phoneNumber || ""} onChange={handleChange} />
-                            <Input label={<>Email </>} type="email" name="email" value={formData.email || ""} onChange={handleChange} />
-                            <Input label={<>Telegram Chat ID <span className="text-red-500">*</span></>} type="number" name="telegramChatId" value={formData.telegramChatId || ""} onChange={handleChange} />
-                            <Input label={<>Balans <span className="text-red-500">*</span></>} type="number" name="balance" value={formData.balance || ""} onChange={handleChange} />
+                            <Input label={<>Telefon raqam {req}</>} name="phoneNumber" value={formData.phoneNumber || ""} onChange={handleChange} />
+                            <Input
+                                label={<>Telegram Chat ID (o'quvchi) {req}</>}
+                                type="number"
+                                name="telegramChatId"
+                                value={formData.telegramChatId ?? ""}
+                                onChange={handleChange}
+                            />
+                            <Input
+                                label="Telegram Chat ID (otasi)"
+                                type="number"
+                                name="telegramChatIdFather"
+                                value={formData.telegramChatIdFather ?? ""}
+                                onChange={handleChange}
+                            />
+                            <Input
+                                label="Telegram Chat ID (onasi)"
+                                type="number"
+                                name="telegramChatIdMother"
+                                value={formData.telegramChatIdMother ?? ""}
+                                onChange={handleChange}
+                            />
+                           
                         </div>
                     </div>
 
                     {/* Manzil */}
                     <div>
-                        <Typography variant="h6" className="mb-4 text-blue-600">
-                            Manzil
-                        </Typography>
+                        {sectionTitle("Manzil")}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <Input label="Viloyat" name="addressRegion" value={formData.addressRegion || ""} onChange={handleChange} />
                             <Input label="Tuman" name="addressDistrict" value={formData.addressDistrict || ""} onChange={handleChange} />
@@ -194,16 +190,13 @@ export default function AdminUserEdit() {
                         </div>
                     </div>
 
-                    {/* Maktab ma’lumotlari */}
+                    {/* Maktab ma'lumotlari */}
                     <div>
-                        <Typography variant="h6" className="mb-4 text-blue-600">
-                            Maktab ma’lumotlari
-                        </Typography>
+                        {sectionTitle("Maktab ma'lumotlari")}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <Input label="Maktab" name="school" value={formData.school || ""} onChange={handleChange} />
                             <Input label="Sinf" name="schoolClass" value={formData.schoolClass || ""} onChange={handleChange} />
 
-                            {/* Test ID Select */}
                             <div className="flex flex-col">
                                 <label className="mb-1 text-sm font-medium text-gray-700">Test</label>
                                 <select
@@ -213,19 +206,13 @@ export default function AdminUserEdit() {
                                     className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 >
                                     <option value="">Test tanlang</option>
-                                    {tests?.length > 0 ? (
-                                        tests.map((test) => (
-                                            <option key={test.id} value={test.id}>
-                                                {test.name || `Test #${test.id}`}
-                                            </option>
-                                        ))
-                                    ) : (
-                                        <option disabled>Testlar mavjud emas</option>
-                                    )}
+                                    {tests.length > 0
+                                        ? tests.map(t => <option key={t.id} value={t.id}>{t.name || `Test #${t.id}`}</option>)
+                                        : <option disabled>Testlar mavjud emas</option>
+                                    }
                                 </select>
                             </div>
 
-                            {/* Group ID Select */}
                             <div className="flex flex-col">
                                 <label className="mb-1 text-sm font-medium text-gray-700">Guruh</label>
                                 <select
@@ -235,19 +222,25 @@ export default function AdminUserEdit() {
                                     className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 >
                                     <option value="">Guruh tanlang</option>
-                                    {groups?.length > 0 ? (
-                                        groups.map((group) => (
-                                            <option key={group.id} value={group.id}>
-                                                {group.name || `Guruh #${group.id}`}
-                                            </option>
-                                        ))
-                                    ) : (
-                                        <option disabled>Guruhlar mavjud emas</option>
-                                    )}
+                                    {groups.length > 0
+                                        ? groups.map(g => <option key={g.id} value={g.id}>{g.name || `Guruh #${g.id}`}</option>)
+                                        : <option disabled>Guruhlar mavjud emas</option>
+                                    }
                                 </select>
                             </div>
+                             <Input label="Email" type="email" name="email" value={formData.email || ""} onChange={handleChange} />
+                            <Input
+                                label="Balans"
+                                type="text"
+                                name="balance"
+                                value={formData?.balance?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") ?? ""}
+                                onChange={(e) => handleChange({
+                                    target: { name: "balance", value: e.target.value.replace(/\s/g, "") },
+                                })}
+                            />
                         </div>
                     </div>
+
                 </CardBody>
             </Card>
         </div>

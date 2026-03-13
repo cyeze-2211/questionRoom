@@ -26,11 +26,14 @@ import AdminResultDetail from "./Pages/AdminResultDetail";
 import AdminTestEdit from "./Pages/AdminTestEdit";
 import Register from "./Pages/Register";
 import UserTest from "./Pages/UserTest";
+import StudentHistory from "./Components/History/StudentHistory";
+import Monitoring from "./Components/AdminMonitoring/Monitoring";
+import GroupMonitor from "./Components/AdminMonitoring/GroupMonitor";
+import History from "./Components/History/History";
 
 function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");  // Check for token
+  const token = localStorage.getItem("token"); 
 
-  // Redirect to login page if no token is found
   if (!token) {
     return <Navigate to="/login" replace />;
   }
@@ -54,6 +57,8 @@ function App() {
             <Route path="/result" element={<ErrorPage />} />
             <Route path="/result/:id" element={<ResultDetail />} />
             <Route path="/user/tests" element={<UserTest />} />
+            <Route path="/history/:id" element={<StudentHistory />} />
+
           </Route>
           {/* Admin Routes - Protected */}
           <Route
@@ -78,9 +83,17 @@ function App() {
             <Route path="admin/test/create" element={<AdminTestCreate />} />
             <Route path={`/admin/test/edit/:id`} element={<AdminTestEdit />} />
             <Route path="admin/test/:ID" element={<AdminTestView />} />
-            {/* <Route path="/question/edit" element={<QuestionEdit/>}/> */}
+            <Route path="admin/monitoring" element={<Monitoring />} />
+            <Route path="admin/history" element={<History />} />
+            <Route path="admin/history/:id" element={<StudentHistory />} />
+
+
+            <Route path="admin/monitoring/:id" element={<GroupMonitor />} />
+
+
+
+
           </Route>
-          {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Route>
       </Routes>
