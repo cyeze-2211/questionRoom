@@ -22,8 +22,6 @@ import {
     ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import StudentHistory from "../Components/History/StudentHistory";
 export default function ResultDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -502,7 +500,6 @@ export default function ResultDetail() {
                     </CardBody>
                 </Card>
             )}
-<StudentHistory studentId={user.id} />
         </div>
     );
 }
