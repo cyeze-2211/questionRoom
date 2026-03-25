@@ -11,6 +11,8 @@ const Sidebar = () => {
     const quiz = location.pathname === '/admin/quiz';
     const test = location.pathname === '/admin/test';
     const rating = location.pathname === '/admin/rating';
+    const monitoring = location.pathname === '/admin/monitoring';
+    const history = location.pathname === '/admin/history';
 
     return (
         <div
@@ -84,7 +86,7 @@ const Sidebar = () => {
                   <NavLink to={'/admin/monitoring'}>
                     <div
                         role="button"
-                        className={`flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ${rating ? 'bg-blue-gray-50' : ''
+                        className={`flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ${monitoring ? 'bg-blue-gray-50' : ''
                             }`}
                     >
                         <div className="grid mr-4 place-items-center">
@@ -96,7 +98,7 @@ const Sidebar = () => {
                  <NavLink to={'/admin/history'}>
                     <div
                         role="button"
-                        className={`flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ${rating ? 'bg-blue-gray-50' : ''
+                        className={`flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ${history ? 'bg-blue-gray-50' : ''
                             }`}
                     >
                         <div className="grid mr-4 place-items-center">

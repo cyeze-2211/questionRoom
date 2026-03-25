@@ -30,7 +30,6 @@ export default function ResultDetail() {
     const [result, setResult] = useState(null);
     const [exportingPdf, setExportingPdf] = useState(false);
 
-    // ✅ Brauzer "Back" tugmasini bloklash
     useEffect(() => {
         // Joriy sahifani history ga yana push qilamiz
         window.history.pushState(null, "", window.location.href);
