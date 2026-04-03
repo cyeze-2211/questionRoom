@@ -29,7 +29,6 @@ import UserTest from "./Pages/UserTest";
 import StudentHistory from "./Components/History/StudentHistory";
 import Monitoring from "./Components/AdminMonitoring/Monitoring";
 import GroupMonitor from "./Components/AdminMonitoring/GroupMonitor";
-import History from "./Components/History/History";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token"); 
@@ -84,7 +83,6 @@ function App() {
             <Route path={`/admin/test/edit/:id`} element={<AdminTestEdit />} />
             <Route path="admin/test/:ID" element={<AdminTestView />} />
             <Route path="admin/monitoring" element={<Monitoring />} />
-            <Route path="admin/history" element={<History />} />
             <Route path="admin/history/:id" element={<StudentHistory />} />
 
 

@@ -1,47 +1,48 @@
+const FAQS = [
+  {
+    q: "Qanday qilib testlarni topshirishim mumkin?",
+    a: 'Asosiy sahifadagi "Testni boshlash" tugmasi orqali fanni tanlang va darhol boshlang.',
+  },
+  {
+    q: "Hisob yaratishim shartmi?",
+    a: "Ko'p testlar uchun shart emas; natijalarni saqlash uchun hisob tavsiya etiladi.",
+  },
+  {
+    q: "Natijalarni qayerdan ko'raman?",
+    a: "Test tugagach ekranda ko'rinadi; tizimga kirgan bo'lsangiz, kabinetda saqlanadi.",
+  },
+  {
+    q: "Savol-xona bepulmi?",
+    a: "Asosiy funksiyalar va ommaviy testlar foydalanuvchilar uchun bepul.",
+  },
+];
+
 export default function FAQ() {
-    const faqs = [
-        {
-            question: "Qanday qilib testlarni topshirishim mumkin?",
-            answer: "Sahifaning boshida joylashgan 'Testni boshlash' tugmasini bosish orqali siz istalgan fanga oid testni tanlab, darhol topshirishni boshlashingiz mumkin.",
-        },
-        {
-            question: "Hisob yaratishim shartmi?",
-            answer: "Yo‘q, testni hisob yaratmasdan ham topshirishingiz mumkin. Ammo natijalarni saqlash va kuzatib borish uchun hisobga kirish tavsiya etiladi.",
-        },
-        {
-            question: "Test natijalarimni qayerdan ko‘rishim mumkin?",
-            answer: "Agar siz tizimga kirgan bo‘lsangiz, shaxsiy profilingizda barcha test natijalaringiz saqlanadi.",
-        },
-        {
-            question: "Bu platforma tekinmi?",
-            answer: "Ha, barcha testlar mutlaqo tekin va hech qanday to‘lov talab qilinmaydi.",
-        },
-    ];
-
-    return (
-        <section id="faq" className="bg-white text-black py-20 px-6 md:px-12" data-aos="fade-up">
-            <div className="max-w-4xl mx-auto text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-4" data-aos="zoom-in">
-                    Tez-tez so‘raladigan savollar
-                </h2>
-                <p className="text-gray-600" data-aos="fade-up" data-aos-delay="200">
-                    Quyidagi savollar orqali platforma haqida ko‘proq bilib oling.
-                </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2" data-aos="fade-up" data-aos-delay="400">
-                {faqs.map((faq, index) => (
-                    <div
-                        key={index}
-                        className="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300"
-                        data-aos="fade-up"
-                        data-aos-delay={index * 100}
-                    >
-                        <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-                        <p className="text-gray-700">{faq.answer}</p>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
+  return (
+    <section className="py-16 md:py-24 bg-exam-grey" id="faq">
+      <div className="max-w-3xl mx-auto px-5 md:px-8">
+        <h2 className="font-display font-bold text-exam-teal text-3xl md:text-4xl text-center mb-10 md:mb-12 reveal">
+          Tez-tez so&apos;raladigan savollar
+        </h2>
+        <div className="space-y-3">
+          {FAQS.map((item) => (
+            <details
+              key={item.q}
+              className="group bg-white rounded-xl border border-exam-teal/10 shadow-sm overflow-hidden reveal"
+            >
+              <summary className="flex justify-between items-center cursor-pointer list-none p-5 text-exam-ink font-semibold font-display hover:bg-exam-grey/50 transition-colors [&::-webkit-details-marker]:hidden">
+                <span className="pr-4">{item.q}</span>
+                <span className="material-symbols-outlined text-exam-teal shrink-0 group-open:rotate-180 transition-transform">
+                  expand_more
+                </span>
+              </summary>
+              <div className="px-5 pb-5 text-exam-muted text-sm leading-relaxed border-t border-exam-grey pt-4">
+                {item.a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

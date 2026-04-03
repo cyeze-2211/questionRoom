@@ -1,0 +1,50 @@
+#lightning-landing {
+  font-family: Inter, system-ui, sans-serif;
+}
+
+#lightning-landing .font-display {
+  font-family: Manrope, system-ui, sans-serif;
+}
+
+#lightning-landing .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+#lightning-landing .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#lightning-landing .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#lightning-landing .hero-mint-glow {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(111, 207, 151, 0.45) 0%,
+    rgba(111, 207, 151, 0.08) 45%,
+    transparent 70%
+  );
+  filter: blur(40px);
+}
+
+#lightning-landing .oval-mask-h {
+  border-radius: 9999px;
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  max-height: 260px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lightning-landing .reveal,
+  #lightning-landing .reveal.active {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

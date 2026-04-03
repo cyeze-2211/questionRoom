@@ -3,51 +3,43 @@ import Logo2 from "../../img/hm2.png";
 import Logo3 from "../../img/hm3.png";
 import Logo4 from "../../img/hm4.png";
 
+const companies = [
+  { name: "Guliston davlat pedagogika instituti", logo: Logo1 },
+  { name: "Guliston davlat universiteti", logo: Logo2 },
+  { name: "Coursera", logo: Logo3 },
+  { name: "Peng Sheng", logo: Logo4 },
+];
+
 export default function TrustedBy() {
-    const companies = [
-        { name: "Google", logo: Logo1 },
-        { name: "Microsoft", logo: Logo2 },
-        { name: "Uzbektelecom", logo: Logo3 },
-        { name: "Yandex", logo: Logo4 },
-    ];
+  return (
+    <section id="partners" className="bg-white text-exam-ink py-16 md:py-20 px-5 md:px-8 border-b border-exam-grey">
+      <div className="max-w-[1280px] mx-auto text-center">
+        <h2 className="font-display font-extrabold text-exam-teal text-3xl md:text-4xl mb-4 reveal">
+          Bizga ishonishadi
+        </h2>
+        <p className="text-base md:text-lg text-exam-muted mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed reveal">
+          Quyidagi tashkilotlar bizning xizmatlarimizdan foydalanishadi.
+        </p>
 
-    return (
-        <section
-            id="TrustedBy"
-            className="bg-white text-black py-20 px-6 md:px-12"
-            data-aos="fade-up"
-        >
-            <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-6" data-aos="zoom-in">
-                    Bizga ishonishadi
-                </h2>
-                <p className="text-lg text-gray-700 mb-10" data-aos="fade-up" data-aos-delay="200">
-                    Quyidagi kompaniyalar bizning xizmatlarimizdan foydalanishadi.
-                </p>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                    {companies.map((company, index) => (
-                        <div
-                            key={index}
-                            className="border border-gray-200 bg-gray-50 shadow-sm rounded-lg flex items-center justify-center h-32 p-4 hover:shadow-md transition"
-                            data-aos="fade-up"
-                            data-aos-delay={index * 100}
-                        >
-                            {company.logo ? (
-                                <img
-                                    src={company.logo}
-                                    alt={company.name}
-                                    className="w-28 grayscale hover:grayscale-0 transition"
-                                />
-                            ) : (
-                                <span className="text-gray-500 font-medium text-sm">
-                                    {company.name}
-                                </span>
-                            )}
-                        </div>
-                    ))}
-                </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
+          {companies.map((company) => (
+            <div
+              key={company.name}
+              className="border border-exam-grey bg-exam-grey/40 shadow-sm rounded-xl flex items-center justify-center h-32 p-4 hover:shadow-md hover:border-exam-teal/15 transition-all reveal"
+            >
+              {company.logo ? (
+                <img
+                  src={company.logo}
+                  alt={company.name}
+                  className="max-h-20 w-auto max-w-[7rem] object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                />
+              ) : (
+                <span className="text-exam-muted font-medium text-sm">{company.name}</span>
+              )}
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

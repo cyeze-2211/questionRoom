@@ -92,7 +92,7 @@ export default function AdminResultDetail() {
 
                     // Uzbek specific letters
                     'Ғ': 'G', 'ғ': 'g', 'Қ': 'Q', 'қ': 'q', 'Ў': 'O', 'ў': 'o',
-                    'Ҳ': 'H', 'ҳ': 'h', 'Ҷ': 'J', 'ҷ': 'j', 'Ҳ': 'H', 'ҳ': 'h',
+                    'Ҳ': 'H', 'ҳ': 'h', 'Ҷ': 'J', 'ҷ': 'j',
                 };
 
                 return String(text).replace(/./g, char => cyrillicMap[char] || char);

@@ -1,59 +1,78 @@
-import Logo from '../../img/logo2Light.png';
-
 export default function Footer() {
-  const handleScrollTo = (id) => {
-    const section = document.getElementById(id);
-    section?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-12 mt-20">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left" data-aos="fade-up">
-        {/* Логотип и описание */}
-        <div className="flex flex-col items-center md:items-start space-y-4">
-          <img src={Logo} alt="Logo" className="w-40" />
-          <p className="text-gray-400 text-sm">
-            Testlar orqali bilim darajangizni aniqlang. Har qanday fan bo‘yicha tezkor va bepul testlar.
+    <footer className="w-full bg-gradient-to-br from-exam-teal via-exam-teal to-exam-teal-mid border-t border-white/10 pt-14 pb-10 px-5 md:px-8 text-white">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="space-y-4">
+          <div className="font-display font-extrabold text-white text-xl">Savol-xona</div>
+          <p className="text-white/75 text-sm leading-relaxed max-w-xs">
+            Zamonaviy bilim va baholash platformasi. Har bir savol — rivojlanishga qadam.
           </p>
+          <div className="flex gap-3 text-white/90">
+            <span className="material-symbols-outlined text-xl cursor-default" aria-hidden>
+              public
+            </span>
+            <span className="material-symbols-outlined text-xl cursor-default" aria-hidden>
+              mail
+            </span>
+          </div>
         </div>
-
-        {/* Навигация */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold mb-2">Navigatsiya</h3>
-          <ul className="space-y-2 text-gray-400">
+        <div>
+          <h4 className="font-display font-bold text-white/90 text-xs uppercase tracking-widest mb-4">
+            Bo&apos;limlar
+          </h4>
+          <ul className="space-y-2 text-sm text-white/75">
             <li>
-              <button
-                onClick={() => handleScrollTo('home')}
-                className="hover:text-white transition"
-              >
-                Bosh sahifa
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleScrollTo('aboutUs')}
-                className="hover:text-white transition"
-              >
+              <a href="#about" className="hover:text-exam-yellow transition-colors">
                 Biz haqimizda
-              </button>
+              </a>
             </li>
             <li>
-              <button
-                onClick={() => handleScrollTo('login')}
-                className="hover:text-white transition"
-              >
-                Kirish
-              </button>
+              <a href="#features" className="hover:text-exam-yellow transition-colors">
+                Imkoniyatlar
+              </a>
+            </li>
+            <li>
+              <a href="#partners" className="hover:text-exam-yellow transition-colors">
+                Hamkorlar
+              </a>
+            </li>
+            <li>
+              <a href="#faq" className="hover:text-exam-yellow transition-colors">
+                Savollar
+              </a>
             </li>
           </ul>
         </div>
-
-        {/* Kontakt va ijtimoiy tarmoqlar */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold mb-2">Kontakt</h3>
-          <p className="text-gray-400 text-sm">Email: info@testplatforma.uz</p>
-          <p className="text-gray-400 text-sm">Tel: +998 90 123 45 67</p>
+        <div>
+          <h4 className="font-display font-bold text-white/90 text-xs uppercase tracking-widest mb-4">
+            Huquqiy
+          </h4>
+          <ul className="space-y-2 text-sm text-white/75">
+            <li>
+              <a href="#" className="hover:text-exam-yellow transition-colors">
+                Maxfiylik
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-exam-yellow transition-colors">
+                Foydalanish shartlari
+              </a>
+            </li>
+          </ul>
         </div>
+        <div>
+          <h4 className="font-display font-bold text-white/90 text-xs uppercase tracking-widest mb-4">
+            Aloqa
+          </h4>
+          <ul className="space-y-2 text-sm text-white/75">
+            <li>info@savol-xona.uz</li>
+            <li>+998 90 123 45 67</li>
+          </ul>
+        </div>
+      </div>
+      <div className="max-w-[1280px] mx-auto mt-12 pt-8 border-t border-white/15 flex flex-col md:flex-row justify-between items-center gap-4 text-white/65 text-xs">
+        <span>© {new Date().getFullYear()} Savol-xona. Barcha huquqlar himoyalangan.</span>
+        <span>Dizayn Savol-xona jamoasi</span>
       </div>
     </footer>
   );

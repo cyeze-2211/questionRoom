@@ -413,19 +413,41 @@ const [testEditStudent, setTestEditStudent] = useState(null);
                                                 </button>
                                             </div>
                                         </td>
-                                     <td className="py-4 px-6">
-    <div className="flex justify-center space-x-2">
-        <button
-            onClick={() => { setTestEditModal(true); setTestEditStudent(course); }}
-            className="p-2 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-lg transition-all"
-            title="Test belgilash"
-        >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fillRule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 102 0V3h4v1a1 1 0 102 0V3a2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clipRule="evenodd"/>
-            </svg>
-        </button>
-    </div>
-</td>
+                                        <td className="py-4 px-6">
+                                            <div className="flex justify-center space-x-2">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setTestEditModal(true);
+                                                        setTestEditStudent(course);
+                                                    }}
+                                                    className="p-2 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-lg transition-all"
+                                                    title="Test belgilash"
+                                                >
+                                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M4 5a2 2 0 012-2v1a1 1 0 102 0V3h4v1a1 1 0 102 0V3a2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <NavLink
+                                                    to={`/admin/history/${course?.id}`}
+                                                    className="p-2 text-violet-600 hover:text-violet-800 hover:bg-violet-100 rounded-lg transition-all inline-flex"
+                                                    title="Ta'lim tarixi"
+                                                >
+                                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </NavLink>
+                                            </div>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

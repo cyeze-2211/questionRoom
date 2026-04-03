@@ -12,7 +12,6 @@ const Sidebar = () => {
     const test = location.pathname === '/admin/test';
     const rating = location.pathname === '/admin/rating';
     const monitoring = location.pathname === '/admin/monitoring';
-    const history = location.pathname === '/admin/history';
 
     return (
         <div
@@ -93,18 +92,6 @@ const Sidebar = () => {
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z"/></svg>
                      </div>
                         Monitoring
-                    </div>
-                </NavLink>
-                 <NavLink to={'/admin/history'}>
-                    <div
-                        role="button"
-                        className={`flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ${history ? 'bg-blue-gray-50' : ''
-                            }`}
-                    >
-                        <div className="grid mr-4 place-items-center">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M23.835 8.5L12 .807L.165 8.5L12 16.192l8-5.2V16h2V9.693z"/><path fill="currentColor" d="M5 17.5v-3.665l7 4.55l7-4.55V17.5c0 1.47-1.014 2.615-2.253 3.338C15.483 21.576 13.802 22 12 22s-3.482-.424-4.747-1.162C6.014 20.115 5 18.97 5 17.5"/></svg>
-                     </div>
-                        Ta'lim tarixi
                     </div>
                 </NavLink>
             </nav>
